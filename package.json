@@ -1,0 +1,33 @@
+{
+  "name": "ai-instructor-portfolio",
+  "version": "1.0.0",
+  "description": "AI 강사 디노 포트폴리오 웹사이트",
+  "main": "index.html",
+  "scripts": {
+    "minify:css": "cleancss -o css/style.min.css css/style.css",
+    "minify:js": "terser js/main.js -o js/main.min.js -c -m",
+    "build": "npm run minify:css && npm run minify:js && echo 'Build complete! Minified files created.'",
+    "optimize:images": "echo 'Optimizing images...' && find images -type f \\( -name '*.jpg' -o -name '*.jpeg' -o -name '*.JPG' -o -name '*.JPEG' \\) -exec sips -Z 1920 {} \\;",
+    "backup:images": "mkdir -p images/backup && cp -R images/*.{jpg,jpeg,png,JPG,JPEG,PNG} images/backup/ 2>/dev/null || true && echo 'Images backed up to images/backup/'",
+    "stats": "echo '=== File Sizes ===' && du -sh css/*.css js/*.js images/* 2>/dev/null | sort -h",
+    "dev": "echo 'Development mode - serving at http://localhost:8000' && python3 -m http.server 8000",
+    "install:tools": "npm install --save-dev clean-css-cli terser",
+    "help": "echo 'Available scripts:\\n  npm run install:tools - Install minification tools\\n  npm run build - Minify CSS and JS\\n  npm run optimize:images - Optimize images (with backup)\\n  npm run backup:images - Backup original images\\n  npm run stats - Show file sizes\\n  npm run dev - Start dev server'"
+  },
+  "keywords": [
+    "portfolio",
+    "ai",
+    "instructor",
+    "education"
+  ],
+  "author": "Dino",
+  "license": "MIT",
+  "devDependencies": {
+    "clean-css-cli": "^5.6.3",
+    "terser": "^5.44.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Lione11456/Lione11456.github.io.git"
+  }
+}

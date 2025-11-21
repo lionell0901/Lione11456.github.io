@@ -294,11 +294,13 @@ nav {
 }
 
 .hero-title {
-    font-size: clamp(3rem, 5vw, 4.5rem);
+    font-size: clamp(2rem, 7vw, 4.5rem);
     font-weight: 800;
-    line-height: 1.1;
+    line-height: 1.2;
     margin-bottom: 2rem;
     letter-spacing: -1px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .hero-title span {
@@ -308,13 +310,15 @@ nav {
 }
 
 .hero-description {
-    font-size: 1.25rem;
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
     color: var(--text-secondary);
     margin-bottom: 3.5rem;
     max-width: 700px;
     margin-left: auto;
     margin-right: auto;
     line-height: 1.7;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .btn {
@@ -487,15 +491,18 @@ section {
 }
 
 .section-title {
-    font-size: clamp(2.2rem, 4vw, 3rem);
+    font-size: clamp(1.75rem, 5vw, 3rem);
     margin-bottom: 1.5rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .section-description {
     color: var(--text-secondary);
-    font-size: 1.1rem;
+    font-size: clamp(1rem, 2vw, 1.1rem);
     max-width: 600px;
     margin: 0 auto;
+    line-height: 1.6;
 }
 
 /* Cards (Glassmorphism) */
@@ -546,7 +553,7 @@ section {
 /* Strengths Grid */
 .strengths-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
 }
 
@@ -614,6 +621,12 @@ section {
     display: block;
 }
 
+.programs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
 .program-card {
     background: var(--bg-secondary);
     border: 1px solid var(--glass-border);
@@ -656,6 +669,11 @@ section {
     color: var(--accent-primary);
 }
 
+.program-description {
+    margin-top: 16px;
+    line-height: 1.6;
+}
+
 .program-content {
     padding: 40px;
 }
@@ -678,8 +696,7 @@ section {
 /* History Section (Showcase) */
 .lecture-showcase {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    /* Adjusted min-width */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
     margin-bottom: 80px;
 }
@@ -863,7 +880,7 @@ section {
 
 .profile-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 30px;
     margin-top: 40px;
 }
@@ -904,7 +921,7 @@ section {
 
 .contact-content .email-link {
     font-family: var(--font-heading);
-    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    font-size: clamp(1.2rem, 5vw, 2.2rem);
     font-weight: 700;
     background: var(--gradient-text);
     -webkit-background-clip: text;
@@ -912,6 +929,7 @@ section {
     transition: var(--transition-smooth);
     margin: 30px 0;
     display: inline-block;
+    word-break: break-all;
 }
 
 .contact-content .email-link:hover {
@@ -965,10 +983,16 @@ footer {
 }
 
 /* Mobile Responsive */
+
+/* Tablet and below */
 @media (max-width: 768px) {
+    .container {
+        padding: 0 20px;
+    }
+
     #hero {
-        /* On small screens, relax layout to avoid clipping */
-        padding-top: calc(var(--header-height) + var(--safe-top));
+        padding-top: calc(var(--header-height) + var(--safe-top) + 20px);
+        padding-bottom: 40px;
         min-height: auto;
     }
 
@@ -987,12 +1011,17 @@ footer {
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        gap: 32px;
         transition: left 0.4s ease;
         z-index: 999;
     }
 
     .nav-links.active {
         left: 0;
+    }
+
+    .nav-links a {
+        font-size: 1.1rem;
     }
 
     .hamburger {
@@ -1010,6 +1039,49 @@ footer {
         transition: 0.3s;
     }
 
+    section {
+        padding: 60px 0;
+    }
+
+    .section-header {
+        margin-bottom: 40px;
+    }
+
+    .strength-card {
+        padding: 30px 24px;
+    }
+
+    .tabs {
+        gap: 12px;
+    }
+
+    .tab-btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+
+    .program-header,
+    .program-content {
+        padding: 30px 24px;
+    }
+
+    .program-title {
+        font-size: 1.4rem;
+    }
+
+    .program-meta {
+        gap: 16px;
+    }
+
+    .stats-section {
+        padding: 40px 24px;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+
     .profile-header {
         flex-direction: column;
         text-align: center;
@@ -1020,13 +1092,187 @@ footer {
         text-align: center;
     }
 
-    .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
+    .profile-intro h3 {
+        font-size: 2rem;
     }
 }
 
-@media (max-width: 480px) {
+/* Mobile devices */
+@media (max-width: 576px) {
+    .container {
+        padding: 0 16px;
+    }
+
+    html {
+        font-size: 15px;
+    }
+
+    .hero-subtitle {
+        font-size: 0.8rem;
+        padding: 5px 12px;
+    }
+
+    .logo-slider-container {
+        margin: 30px 0 50px;
+    }
+
+    .btn {
+        padding: 14px 32px;
+        font-size: 1rem;
+    }
+
+    .strengths-grid,
+    .programs-grid,
+    .lecture-showcase {
+        grid-template-columns: 1fr;
+    }
+
+    .strength-card {
+        padding: 24px 20px;
+    }
+
+    .strength-icon {
+        font-size: 2rem;
+    }
+
+    .strength-title {
+        font-size: 1.3rem;
+    }
+
+    .section-description {
+        font-size: 1rem;
+    }
+
+    .tabs {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .tab-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .tab-btn i {
+        margin-right: 8px;
+    }
+
+    .program-card {
+        margin-bottom: 20px;
+    }
+
+    .showcase-content {
+        padding: 24px 20px;
+    }
+
+    .showcase-title {
+        font-size: 1.2rem;
+    }
+
+    .history-filters {
+        gap: 10px;
+    }
+
+    .filter-btn {
+        padding: 8px 18px;
+        font-size: 0.85rem;
+    }
+
+    .stats-section {
+        padding: 30px 20px;
+    }
+
+    .stats-section h3 {
+        font-size: 1.5rem;
+    }
+
+    .stat-number {
+        font-size: 2.5rem;
+    }
+
+    .stat-label {
+        font-size: 0.95rem;
+    }
+
+    .profile-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-content .section-description {
+        font-size: 1rem;
+        padding: 0 10px;
+    }
+}
+
+/* Very small mobile devices */
+@media (max-width: 400px) {
+    .container {
+        padding: 0 12px;
+    }
+
+    html {
+        font-size: 14px;
+    }
+
+    .logo {
+        font-size: 1.3rem;
+    }
+
+    .hero-subtitle {
+        font-size: 0.75rem;
+        letter-spacing: 1.5px;
+    }
+
+    .btn {
+        padding: 12px 24px;
+        font-size: 0.95rem;
+    }
+
+    section {
+        padding: 50px 0;
+    }
+
+    .section-tag {
+        font-size: 0.75rem;
+        letter-spacing: 2px;
+    }
+
     .stats-grid {
         grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+    }
+
+    .stat-label {
+        font-size: 0.9rem;
+    }
+
+    .program-header,
+    .program-content {
+        padding: 24px 16px;
+    }
+
+    .strength-card {
+        padding: 20px 16px;
+    }
+
+    .profile-photo {
+        width: 120px;
+        height: 120px;
+    }
+
+    .profile-intro h3 {
+        font-size: 1.75rem;
+    }
+
+    .profile-role {
+        font-size: 1.1rem;
+    }
+
+    .profile-description {
+        font-size: 1rem;
     }
 }

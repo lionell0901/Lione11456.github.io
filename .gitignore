@@ -1,2 +1,14 @@
+# macOS
 .DS_Store
 **/.DS_Store
+
+# Node.js
+node_modules/
+package-lock.json
+
+# Backups
+images/backup/
+
+# Development files (optional - uncomment if you want to exclude from git)
+# css/style.css
+# js/main.js
