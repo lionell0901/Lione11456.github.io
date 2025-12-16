@@ -175,4 +175,77 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
     }
+
+    // --- EmailJS Contact Form ---
+    // Initialize EmailJS with your Public Key
+    (function () {
+        emailjs.init("usSqEtBNQGGfnaBK_8jyV");
+    })();
+
+    const contactForm = document.getElementById('contact-form');
+    const formMessage = document.getElementById('form-message');
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const submitBtn = contactForm.querySelector('.submit-btn');
+            const originalBtnText = submitBtn.innerHTML;
+
+            // Disable button and show loading state
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 전송 중...';
+
+            // Get form data
+            const templateParams = {
+                from_name: document.getElementById('name').value,
+                from_email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                company: document.getElementById('company').value,
+                participants: document.getElementById('participants').value,
+                schedule: document.getElementById('schedule').value,
+                message: document.getElementById('message').value
+            };
+
+            // Send email using EmailJS
+            emailjs.send('service_86ytxlb', 'URK5IT-ga48mugcnf', templateParams)
+                .then(function (response) {
+                    console.log('SUCCESS!', response.status, response.text);
+
+                    // Show success message
+                    formMessage.style.display = 'block';
+                    formMessage.className = 'form-message success';
+                    formMessage.textContent = '✅ 문의가 성공적으로 전송되었습니다! 빠른 시간 내에 답변드리겠습니다.';
+
+                    // Reset form
+                    contactForm.reset();
+
+                    // Re-enable button
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalBtnText;
+
+                    // Hide message after 5 seconds
+                    setTimeout(function () {
+                        formMessage.style.display = 'none';
+                    }, 5000);
+
+                }, function (error) {
+                    console.log('FAILED...', error);
+
+                    // Show error message
+                    formMessage.style.display = 'block';
+                    formMessage.className = 'form-message error';
+                    formMessage.textContent = '❌ 전송 중 오류가 발생했습니다. 이메일(lionell20@naver.com)로 직접 연락 부탁드립니다.';
+
+                    // Re-enable button
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalBtnText;
+
+                    // Hide message after 8 seconds
+                    setTimeout(function () {
+                        formMessage.style.display = 'none';
+                    }, 8000);
+                });
+        });
+    }
 });
