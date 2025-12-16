@@ -179,7 +179,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // --- EmailJS Contact Form ---
     // Initialize EmailJS with your Public Key
     (function () {
-        emailjs.init("usSqEtBNQGGfnaBK_8jyV");
+        emailjs.init("URK5IT-ga48mugcnf");
         console.log("EmailJS initialized successfully");
     })();
 
