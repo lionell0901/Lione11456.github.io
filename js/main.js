@@ -180,6 +180,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Initialize EmailJS with your Public Key
     (function () {
         emailjs.init("usSqEtBNQGGfnaBK_8jyV");
+        console.log("EmailJS initialized successfully");
     })();
 
     const contactForm = document.getElementById('contact-form');
@@ -188,6 +189,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (contactForm) {
         contactForm.addEventListener('submit', function (e) {
             e.preventDefault();
+            console.log("Form submitted");
 
             const submitBtn = contactForm.querySelector('.submit-btn');
             const originalBtnText = submitBtn.innerHTML;
@@ -207,15 +209,17 @@ document.addEventListener('DOMContentLoaded', function () {
                 message: document.getElementById('message').value
             };
 
+            console.log("Template params:", templateParams);
+
             // Send email using EmailJS
-            emailjs.send('service_86ytxlb', 'URK5IT-ga48mugcnf', templateParams)
+            emailjs.send('service_86ytxlb', 'template_10s18ru', templateParams)
                 .then(function (response) {
                     console.log('SUCCESS!', response.status, response.text);
 
                     // Show success message
                     formMessage.style.display = 'block';
                     formMessage.className = 'form-message success';
-                    formMessage.textContent = '✅ 문의가 성공적으로 전송되었습니다! 빠른 시간 내에 답변드리겠습니다.';
+                    formMessage.innerHTML = '<i class="fa-solid fa-circle-check"></i> 문의가 성공적으로 전송되었습니다! 빠른 시간 내에 답변드리겠습니다.';
 
                     // Reset form
                     contactForm.reset();
@@ -224,22 +228,28 @@ document.addEventListener('DOMContentLoaded', function () {
                     submitBtn.disabled = false;
                     submitBtn.innerHTML = originalBtnText;
 
-                    // Hide message after 5 seconds
+                    // Scroll to message
+                    formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+                    // Hide message after 6 seconds
                     setTimeout(function () {
                         formMessage.style.display = 'none';
-                    }, 5000);
+                    }, 6000);
 
                 }, function (error) {
-                    console.log('FAILED...', error);
+                    console.error('EmailJS Error:', error);
 
                     // Show error message
                     formMessage.style.display = 'block';
                     formMessage.className = 'form-message error';
-                    formMessage.textContent = '❌ 전송 중 오류가 발생했습니다. 이메일(lionell20@naver.com)로 직접 연락 부탁드립니다.';
+                    formMessage.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> 전송 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.';
 
                     // Re-enable button
                     submitBtn.disabled = false;
                     submitBtn.innerHTML = originalBtnText;
+
+                    // Scroll to message
+                    formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
                     // Hide message after 8 seconds
                     setTimeout(function () {
